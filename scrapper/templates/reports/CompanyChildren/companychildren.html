@@ -1,0 +1,60 @@
+{% extends "admin/base_site.html" %}
+
+{%block title %} Company's Children {%endblock%}
+
+{% load static %}
+
+{% block content %}
+
+
+<form  name="form1" method="POST">
+    {% csrf_token %}
+    <table class="table">
+
+    <tr>
+
+        <td>Company:</td>
+			<td>
+				<select name="company" >
+<!--					<option value="0">All</option>-->
+						{%for company in allCompanies%}
+							<option value="{{company.id}}">{{company.name}}</option>
+<!--							<option value="1">fejj</option>-->
+						{%endfor%}
+                </select>
+			</td>
+    </tr>
+    <tr>
+        <td colspan="6" style="text-align:right;"><input type="submit" class="btn btn-success pull-right" name="children_of_company" value="Search"/></td>
+    </tr>
+
+</table>
+</form>
+<script>
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth() + 1; //January is 0!
+var yyyy = today.getFullYear();
+
+var tomorrow = new Date();
+// add a day
+tomorrow.setDate(today.getDate() + 1);
+
+if (dd < 10) {
+   dd = '0' + dd;
+}
+
+if (mm < 10) {
+   mm = '0' + mm;
+}
+
+today = yyyy + '-' + mm + '-' + dd;
+document.getElementById("idFromDate").setAttribute("min", today);
+
+
+
+document.getElementById("idToDate").setAttribute("min", today);
+
+
+</script>
+{%endblock%}
